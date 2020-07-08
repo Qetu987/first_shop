@@ -14,10 +14,19 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from index.views import index
+from django.urls import path, include
+from index.views import index, about
 
 urlpatterns = [
+    path('grappelli/', include('grappelli.urls')), # grappelli URLS
+
     path('admin/', admin.site.urls),
     path('', index),
+    path('about', about, name='about-me'),
 ]
+
+from django.conf import settings
+
+if settings.DEBUG:
+    from django.conf.urls.static import static
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
