@@ -9,13 +9,10 @@ class Command(BaseCommand):
         Page.objects.all().delete()
 
         with open('pages.json') as f:
-            templates = json.load(f)
+            data = json.load(f)
 
-        for line in templates:
-            title = line['title']
-            content = line['content']
-
+        for line in data:
             p = Page()
-            p.title = title
-            p.content = content
+            p.title = line['title']
+            p.content = line['content']
             p.save()
