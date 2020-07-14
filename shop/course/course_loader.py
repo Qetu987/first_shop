@@ -1,4 +1,4 @@
-from course.models import  Course
+from course.models import  Course, Lesson, Topic
 from shop.settings import DATA_DIR
 from os import listdir
 from os.path import isfile, join, isdir
@@ -13,6 +13,7 @@ class CourseLoader(object):
     def process(self):
         self.get_course_or_create()
         self.save_meta_course()
+        self.save_lessons()
 
     def get_course_or_create(self):
         try:
@@ -41,6 +42,29 @@ class CourseLoader(object):
         except Exception as e:
             print(str(e))
 
+    def save_lessons(self):
+        path = DATA_DIR + '/' + self.dir + '/ru'
+        onlydirs = [f for f in listdir(path) if isdir(join(path, f))]
+        for d in onlydirs:
+            lesson_yml_path = path + '/' + d + '/meta.yml'
+            data = self.get_meta(lesson_yml_path)
+            print(data)
+            try:
+                lesson = Lesson.objects.get(name_slug=d)
+            except:
+                lesson = Lesson()
+            lesson.name_slug = d
+            lesson.title = data['name']
+            lesson.course = self.course
+            lesson.save()
+            print('Saving lesson...%s' % data['slug'])
+            for f in data['files']:
+                try:
+                    topic = Topic.object.get(lesson=lesson, filename=f['file'])
+                except:
+                    topic = Topic.objects.create(filename=f['file'], title=f['title'], lesson=lesson)
+                print('Saving topic %s' % f['file'])
+
 
     def get_meta(self,path):
         if isfile(path):
@@ -60,3 +84,5 @@ class CourseLoader(object):
             if d.find('.') == -1:
                 out.append(d)
         return out
+
+

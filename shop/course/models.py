@@ -12,6 +12,24 @@ class Course(models.Model):
     name_slug = models.CharField(verbose_name='Name slug',max_length=250, blank=True, null = True)
     is_active = models.BooleanField(verbose_name=_('Is published?'), default=False)
 
+    def __str__(self):
+        return self.name
+
+
     @property
     def image_tag(self):
         return mark_safe('<img width="60" src="%s" />' % self.image.url)
+
+class Lesson(models.Model):
+    title = models.CharField(max_length=250, blank=True, verbose_name=_(u'Name'))
+    number = models.IntegerField(default=0, verbose_name=_(u'Number'))
+    is_active = models.BooleanField(verbose_name=_('Is main?'), default=False)
+    image = models.ImageField(blank=True, verbose_name=_(u'Image'), upload_to='lessons_images', null=True)
+    course = models.ForeignKey(Course, verbose_name=_(u'Course'), on_delete=models.CASCADE)
+    name_slug = models.CharField(verbose_name='Name slug', max_length=250, blank=True)
+
+
+class Topic(models.Model):
+    title = models.CharField(max_length=250, blank=True, verbose_name=_(u'Name'))
+    filename = models.CharField(verbose_name='Name slug',max_length=250, blank=True)
+    lesson = models.ForeignKey(Lesson, verbose_name=_(u'Lesson'), on_delete=models.CASCADE)
