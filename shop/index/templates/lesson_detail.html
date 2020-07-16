@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+{% block carousel %} {% endblock %}
+{% block content %}
+
+    <div class="section margin-top_50">
+        <div class="container">
+            
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="full">
+                            <div class="heading_main text_align_left">
+                            <h2>{{ lesson.title }}</h2>
+                            </div>
+                           
+                            
+                        </div>
+                    </div>
+
+
+                
+                </div>
+
+                {%  for topic in topics %}
+                    <div>
+                        {{ topic.content }}
+                    </div>
+                {% endfor %}
+
+        </div>
+    </div>
+
+
+{% endblock %}
+

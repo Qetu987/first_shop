@@ -2,12 +2,11 @@
 {% block carousel %} {% endblock %}
 {% block content %}
 
-	<!-- section -->
     <div class="section margin-top_50">
         <div class="container">
-            {% for course in courses %}
+            
                 <div class="row">
-                    <div class="col-md-6 layout_padding_2">
+                    <div class="col-md-12">
                         <div class="full">
                             <div class="heading_main text_align_left">
                             <h2>{{ course.name }}</h2>
@@ -15,20 +14,23 @@
                             <div class="full">
                             <p>{{ course.desc }}</p>
                             </div>
-                            <div class="full">
-                            <a class="hvr-radial-out button-theme" href="{{ course.get_absolute_url }}">About more</a>
-                            </div>
+
+
+                            
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="full">
-                            <img src="static/images/img2.png" alt="#" />
-                        </div>
-                    </div>
+                
                 </div>
-            {% endfor %}
+
+                <ul>
+                    {% for lesson in lessons %}
+                        <li><a href="{{ lesson.get_absolute_url }}">{{ lesson.title }}</a></li>
+                    {% endfor %}
+                </ul>
+           
         </div>
     </div>
-	<!-- end section -->
+
 
 {% endblock %}
+

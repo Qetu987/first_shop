@@ -19,7 +19,7 @@ from index.views import index, about
 
 urlpatterns = [
     path('grappelli/', include('grappelli.urls')), # grappelli URLS
-
+    path('course/', include('course.urls')),
     path('admin/', admin.site.urls),
     path('', index),
     path('about', about, name='about-me'),
