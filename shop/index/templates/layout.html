@@ -58,8 +58,15 @@
                         <li><a class="nav-link" href="{% url 'about-me' %}">About</a></li>
                         <li><a class="nav-link" href="courses.html">Courses</a></li>
                         <li><a class="nav-link" href="reaserch.html">Reaserch</a></li>
-						<li><a class="nav-link" href="news.html">News</a></li>
-						<li><a class="nav-link" href="contact.html">Contact us</a></li>
+                        <li><a class="nav-link" href="news.html">News</a></li>
+                        
+                        {% if user.is_authenticated %}
+                                <li><a class="nav-link" href="contact.html">Logout</a></li>
+                        {% else %}
+                        <li><a class="nav-link" href='{% url "social:begin" "google-oauth2" %}'>Login</a></li>
+                        {% endif %}
+                        
+
                     </ul>
                 </div>
                 <div class="search-box">

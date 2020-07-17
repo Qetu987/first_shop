@@ -60,9 +60,10 @@ class CourseLoader(object):
             print('Saving lesson...%s' % data['slug'])
             for f in data['files']:
                 try:
-                    topic = Topic.object.get(lesson=lesson, filename=f['file'])
+                    topic = Topic.objects.get(lesson=lesson, filename=f['file'])
                 except:
                     topic = Topic.objects.create(filename=f['file'], title=f['title'], lesson=lesson)
+                topic.check_video(f)
                 print('Saving topic %s' % f['file'])
 
 

@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index),
     path('about', about, name='about-me'),
+    path('social-auth/', include('social_django.urls', namespace="social")),
 ]
 
 from django.conf import settings

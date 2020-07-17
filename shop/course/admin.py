@@ -15,4 +15,4 @@ class LessonAdmin(admin.ModelAdmin):
 
 @admin.register(Topic)
 class TopicAdmin(admin.ModelAdmin):
-    list_display = ['title', 'filename', 'lesson']
+    list_display = ['title', 'filename', 'lesson', 'video', 'has_video']

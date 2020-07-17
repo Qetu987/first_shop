@@ -2,6 +2,10 @@
 {% block carousel %} {% endblock %}
 {% block content %}
 
+    <div class="text_align_right">
+        <a href="{{ lesson.course.get_absolute_url }}">Назад</a>
+    </div>
+
     <div class="section margin-top_50">
         <div class="container">
             
@@ -22,6 +26,7 @@
 
                 {%  for topic in topics %}
                     <div>
+                        {{ topic.video_tag }}
                         {{ topic.content }}
                     </div>
                 {% endfor %}

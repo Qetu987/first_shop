@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'index',
     'course',
+    'social_django'
 ]
 
 MIDDLEWARE = [
@@ -129,4 +130,14 @@ STATICFILES_DIRS = [
     '/var/www/static/',
 ]
 
-DATA_DIR = str(os.path.join(BASE_DIR, "../data"))
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.open_id.OpenIdAuth',
+    'social_core.backends.google.GoogleOpenId',
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.google.GoogleOAuth',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
+
+from .local import *
