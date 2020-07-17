@@ -130,3 +130,5 @@ STATICFILES_DIRS = [
 ]
 
 DATA_DIR = str(os.path.join(BASE_DIR, "../data"))
+
+from local import *
